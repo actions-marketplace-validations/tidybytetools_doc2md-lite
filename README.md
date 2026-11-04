@@ -1,6 +1,6 @@
 # doc2md-lite
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/tidybytetools/doc2md-lite/blob/main/LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![MCP server](https://img.shields.io/badge/MCP-stdio-purple.svg)](#use-it-from-claude-desktop-or-cursor-mcp)
 
@@ -9,7 +9,21 @@ Need Word files, chunks for AI search (RAG), whole folders or page ranges? The p
 
 Runs on your own computer, so your files are never uploaded anywhere. MIT license. Python 3.10 or newer, on Windows, Mac and Linux.
 
+<!-- mcp-name: io.github.tidybytetools/doc2md-lite -->
+
 ## Install
+
+```
+pip install doc2md-lite
+```
+
+Or use pipx, which keeps it in its own space:
+
+```
+pipx install doc2md-lite
+```
+
+Want the newest code from GitHub instead?
 
 ```
 pip install git+https://github.com/tidybytetools/doc2md-lite
@@ -79,7 +93,7 @@ There is a small free MCP server built in. It gives your AI app one tool, `conve
 Run it by hand to check it starts (it waits quietly for an app to talk to it):
 
 ```
-uvx --from git+https://github.com/tidybytetools/doc2md-lite doc2md-lite-mcp
+uvx --from doc2md-lite doc2md-lite-mcp
 ```
 
 Claude Desktop (`claude_desktop_config.json`) or Cursor (`~/.cursor/mcp.json`):
@@ -89,7 +103,7 @@ Claude Desktop (`claude_desktop_config.json`) or Cursor (`~/.cursor/mcp.json`):
   "mcpServers": {
     "doc2md-lite": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/tidybytetools/doc2md-lite", "doc2md-lite-mcp"]
+      "args": ["--from", "doc2md-lite", "doc2md-lite-mcp"]
     }
   }
 }
@@ -103,7 +117,7 @@ Tool: `convert_to_markdown(path, tables="lines", output_path="")`. It returns th
 - **Don't use when:** the PDF is a scan, the file is .docx, or you need many files or chunks with page numbers. Use the paid version for those.
 - **Input:** a file path, plus optional `tables` (`lines`, `text`, `off`).
 - **Output:** Markdown text. Tables are Markdown tables with the first row as the header.
-- CLI exit code is 0 on success and 1 on error (message on stderr, or `{"ok": false, "error": ...}` with `--json`). See also [`llms.txt`](llms.txt).
+- CLI exit code is 0 on success and 1 on error (message on stderr, or `{"ok": false, "error": ...}` with `--json`). See also [`llms.txt`](https://github.com/tidybytetools/doc2md-lite/blob/main/llms.txt).
 
 ## Python
 

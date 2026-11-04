@@ -1,19 +1,24 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.tidybytetools/doc2md-lite",
+  "title": "doc2md-lite",
   "description": "Turn local text PDFs and HTML files into clean Markdown, tables kept. Runs on your computer.",
   "repository": {
     "url": "https://github.com/tidybytetools/doc2md-lite",
     "source": "github"
   },
+  "websiteUrl": "https://github.com/tidybytetools/doc2md-lite",
   "version": "1.0.0",
   "packages": [
     {
       "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
       "identifier": "doc2md-lite",
       "version": "1.0.0",
       "runtimeHint": "uvx",
-      "transport": { "type": "stdio" }
+      "transport": {
+        "type": "stdio"
+      }
     }
   ]
 }

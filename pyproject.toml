@@ -1,29 +1,43 @@
 [build-system]
-requires = ["setuptools>=61"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "doc2md-lite"
 version = "1.0.0"
-description = "Turn a text PDF or HTML file into clean Markdown, with tables kept as Markdown tables. Runs locally. CLI + MCP server."
+description = "Turn a text PDF or HTML file into clean Markdown, with tables kept as Markdown tables. Runs locally. CLI and MCP server."
 readme = "README.md"
-license = {text = "MIT"}
-authors = [{name = "tidybyte"}]
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Tidy Byte Tools"}]
 requires-python = ">=3.10"
-dependencies = ["pdfplumber>=0.10", "beautifulsoup4>=4.12", "mcp>=1.2,<2"]
+dependencies = [
+  "pdfplumber>=0.10",
+  "beautifulsoup4>=4.12",
+  "mcp>=1.2,<2",
+]
 keywords = ["pdf", "html", "markdown", "pdf-to-markdown", "html-to-markdown", "llm", "rag", "cli", "mcp", "mcp-server"]
 classifiers = [
-  "Programming Language :: Python :: 3",
-  "License :: OSI Approved :: MIT License",
-  "Operating System :: OS Independent",
+  "Development Status :: 4 - Beta",
   "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: End Users/Desktop",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Topic :: Text Processing :: Markup :: Markdown",
+  "Topic :: Utilities",
 ]
 
 [project.urls]
-"Paid version" = "https://tidybyte.gumroad.com/l/frlkv"
+Homepage = "https://tidybyte.gumroad.com/l/frlkv"
 Source = "https://github.com/tidybytetools/doc2md-lite"
-Shop = "https://tidybyte.gumroad.com"
+Issues = "https://github.com/tidybytetools/doc2md-lite/issues"
+Changelog = "https://github.com/tidybytetools/doc2md-lite/blob/main/CHANGELOG.md"
 
 [project.scripts]
 doc2md-lite = "doc2md_lite:main"

@@ -2,10 +2,10 @@
 
 > Free, MIT-licensed tool that turns a local text PDF or saved HTML file into clean Markdown. Tables become Markdown tables. Runs offline. Has a CLI, a Python API and a stdio MCP server.
 
-- Install: `pip install git+https://github.com/tidybytetools/doc2md-lite`
+- Install: `pip install doc2md-lite` (or from GitHub: `pip install git+https://github.com/tidybytetools/doc2md-lite`)
 - CLI: `doc2md-lite file.pdf -o out.md [--tables lines|text|off] [--json]`. `-o -` prints the Markdown. Exit 0 ok, 1 error.
 - Python: `from doc2md_lite import convert; md, info = convert("file.pdf")` where info is {"type", "tables", "headings", "scanned_pages"}.
-- MCP: `uvx --from git+https://github.com/tidybytetools/doc2md-lite doc2md-lite-mcp` exposes `convert_to_markdown(path, tables="lines", output_path="") -> str` (Markdown text, or the saved path if output_path is set).
+- MCP: `uvx --from doc2md-lite doc2md-lite-mcp` exposes `convert_to_markdown(path, tables="lines", output_path="") -> str` (Markdown text, or the saved path if output_path is set).
 
 ## Use when
 - You need a PDF with a text layer, or an HTML file, as Markdown for an LLM, a wiki or notes.
