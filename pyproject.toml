@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doc2md-lite"
+version = "1.0.0"
+description = "Turn a text PDF or HTML file into clean Markdown, with tables kept as Markdown tables. Runs locally. CLI + MCP server."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "tidybyte"}]
+requires-python = ">=3.10"
+dependencies = ["pdfplumber>=0.10", "beautifulsoup4>=4.12", "mcp>=1.2,<2"]
+keywords = ["pdf", "html", "markdown", "pdf-to-markdown", "html-to-markdown", "llm", "rag", "cli", "mcp", "mcp-server"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Environment :: Console",
+  "Topic :: Text Processing :: Markup :: Markdown",
+]
+
+[project.urls]
+"Paid version" = "https://tidybyte.gumroad.com"
+Source = "https://github.com/tidybytetools/doc2md-lite"
+Shop = "https://tidybyte.gumroad.com"
+
+[project.scripts]
+doc2md-lite = "doc2md_lite:main"
+doc2md-lite-mcp = "doc2md_lite_mcp:main"
+
+[tool.setuptools]
+py-modules = ["doc2md_lite", "doc2md_lite_mcp"]
