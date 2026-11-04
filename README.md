@@ -1,3 +1,12 @@
+<p>
+  <a href="https://github.com/tidybytetools">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/tidybytetools/doc2md-lite/main/assets/tidybytetools-lockup-dark.png">
+      <img alt="Tidy Byte Tools" src="https://raw.githubusercontent.com/tidybytetools/doc2md-lite/main/assets/tidybytetools-lockup-light.png" height="44">
+    </picture>
+  </a>
+</p>
+
 # doc2md-lite
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/tidybytetools/doc2md-lite/blob/main/LICENSE)
