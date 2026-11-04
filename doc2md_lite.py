@@ -7,13 +7,13 @@ Usage:
   doc2md-lite page.html -o page.md
   doc2md-lite page.html -o -         # print to screen
 
-Paid version (Word files, RAG chunks, whole folders, page picking): https://tidybyte.gumroad.com
+Paid version (Word files, RAG chunks, whole folders, page picking): https://tidybyte.gumroad.com/l/frlkv
 """
 import argparse, json, os, re, sys
 from collections import Counter
 
 __version__ = "1.0.0"
-PAID_URL = "https://tidybyte.gumroad.com"
+PAID_URL = "https://tidybyte.gumroad.com/l/frlkv"
 
 
 # ---------- shared helpers ----------

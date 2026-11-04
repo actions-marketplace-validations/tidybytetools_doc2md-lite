@@ -5,7 +5,7 @@
 [![MCP server](https://img.shields.io/badge/MCP-stdio-purple.svg)](#use-it-from-claude-desktop-or-cursor-mcp)
 
 Free tool that turns a text PDF or a saved web page (.html) into clean Markdown. Tables stay real Markdown tables.
-Need Word files, chunks for AI search (RAG), whole folders or page ranges? The paid version does that: **[doc2md on Gumroad](https://tidybyte.gumroad.com)**
+Need Word files, chunks for AI search (RAG), whole folders or page ranges? The paid version does that: **[doc2md on Gumroad](https://tidybyte.gumroad.com/l/frlkv)**
 
 Runs on your own computer, so your files are never uploaded anywhere. MIT license. Python 3.10 or newer, on Windows, Mac and Linux.
 
@@ -59,7 +59,7 @@ When you run it in a terminal it ends with one short line about the paid version
 
 ## Lite vs paid
 
-| | lite (free) | [doc2md](https://tidybyte.gumroad.com) |
+| | lite (free) | [doc2md](https://tidybyte.gumroad.com/l/frlkv) |
 |---|---|---|
 | Text PDF and HTML to Markdown | yes | yes |
 | Tables kept as Markdown tables | yes | yes |

@@ -21,7 +21,7 @@ classifiers = [
 ]
 
 [project.urls]
-"Paid version" = "https://tidybyte.gumroad.com"
+"Paid version" = "https://tidybyte.gumroad.com/l/frlkv"
 Source = "https://github.com/tidybytetools/doc2md-lite"
 Shop = "https://tidybyte.gumroad.com"
 

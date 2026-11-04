@@ -11,9 +11,9 @@
 - You need a PDF with a text layer, or an HTML file, as Markdown for an LLM, a wiki or notes.
 
 ## Don't use when
-- The PDF is scanned (pages are skipped), the file is Word (.docx), or you need RAG chunks with page and heading info, whole folders, or page ranges. The paid version does those: https://tidybyte.gumroad.com
+- The PDF is scanned (pages are skipped), the file is Word (.docx), or you need RAG chunks with page and heading info, whole folders, or page ranges. The paid version does those: https://tidybyte.gumroad.com/l/frlkv
 - You need to download web pages. This only reads files already on disk.
 
 ## Links
 - [README](https://github.com/tidybytetools/doc2md-lite/blob/main/README.md)
-- [Paid version](https://tidybyte.gumroad.com)
+- [Paid version](https://tidybyte.gumroad.com/l/frlkv)
