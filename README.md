@@ -11,9 +11,14 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/tidybytetools/doc2md-lite/blob/main/LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![MCP server](https://img.shields.io/badge/MCP-stdio-purple.svg)](#use-it-from-claude-desktop-or-cursor-mcp)
+[![MCP server](https://img.shields.io/badge/MCP-stdio-purple.svg)](#use-it-with-your-ai-app-mcp)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-listed-green.svg)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.tidybytetools/doc2md-lite)
+[![PyPI downloads](https://img.shields.io/pypi/dm/doc2md-lite.svg)](https://pypistats.org/packages/doc2md-lite)
+[![Glama score](https://glama.ai/mcp/servers/tidybytetools/doc2md-lite/badges/score.svg)](https://glama.ai/mcp/servers/tidybytetools/doc2md-lite)
 
-Free tool that turns a text PDF or a saved web page (.html) into clean Markdown. Tables stay real Markdown tables.
+**Free. No API key. Runs on your own computer, so your files stay with you.**
+
+A tool that turns a text PDF or a saved web page (.html) into clean Markdown. Tables stay real Markdown tables.
 Need Word files, chunks for AI search (RAG), whole folders or page ranges? The paid version does that: **[doc2md on Gumroad](https://tidybyte.gumroad.com/l/frlkv)**
 
 Runs on your own computer, so your files are never uploaded anywhere. MIT license. Python 3.10 or newer, on Windows, Mac and Linux.
@@ -95,9 +100,9 @@ When you run it in a terminal it ends with one short line about the paid version
 
 Pick what fits you. [MarkItDown](https://github.com/microsoft/markitdown) reads many more file types. [pandoc](https://pandoc.org/) is great for Word and HTML but does not read PDFs. [pymupdf4llm](https://github.com/pymupdf/RAG) is fast on PDFs but uses the AGPL license. doc2md-lite is small, MIT, keeps PDF tables as tables, and has an MCP server built in.
 
-## Use it from Claude Desktop or Cursor (MCP)
+## Use it with your AI app (MCP)
 
-There is a small free MCP server built in. It gives your AI app one tool, `convert_to_markdown`. It needs [uv](https://docs.astral.sh/uv/).
+There is a small free MCP server built in. It gives your AI app one tool, `convert_to_markdown`. No API key or account is needed. It needs [uv](https://docs.astral.sh/uv/), which gives you the `uvx` command.
 
 Run it by hand to check it starts (it waits quietly for an app to talk to it):
 
@@ -105,7 +110,11 @@ Run it by hand to check it starts (it waits quietly for an app to talk to it):
 uvx --from doc2md-lite doc2md-lite-mcp
 ```
 
-Claude Desktop (`claude_desktop_config.json`) or Cursor (`~/.cursor/mcp.json`):
+Pick your app below and copy the block. Restart the app after you save.
+
+### Claude Desktop
+
+Open **Settings > Developer > Edit Config**. That opens `claude_desktop_config.json`. Add this:
 
 ```json
 {
@@ -116,6 +125,78 @@ Claude Desktop (`claude_desktop_config.json`) or Cursor (`~/.cursor/mcp.json`):
     }
   }
 }
+```
+
+If Claude says it can't find `uvx`, run `which uvx` (Mac/Linux) or `where uvx` (Windows) and put that full path in `"command"`.
+
+### Cursor
+
+Put the same block in `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):
+
+```json
+{
+  "mcpServers": {
+    "doc2md-lite": {
+      "command": "uvx",
+      "args": ["--from", "doc2md-lite", "doc2md-lite-mcp"]
+    }
+  }
+}
+```
+
+### VS Code
+
+VS Code uses `servers`, not `mcpServers`. Put this in `.vscode/mcp.json` in your project, or run **MCP: Open User Configuration** to use it everywhere:
+
+```json
+{
+  "servers": {
+    "doc2md-lite": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["--from", "doc2md-lite", "doc2md-lite-mcp"]
+    }
+  }
+}
+```
+
+Or add it with one command:
+
+```
+code --add-mcp '{"name":"doc2md-lite","type":"stdio","command":"uvx","args":["--from","doc2md-lite","doc2md-lite-mcp"]}'
+```
+
+### Cline
+
+In the Cline panel, click the **MCP Servers** icon, open **Configure**, then click **Configure MCP Servers**. Add this inside `mcpServers`:
+
+```json
+{
+  "mcpServers": {
+    "doc2md-lite": {
+      "command": "uvx",
+      "args": ["--from", "doc2md-lite", "doc2md-lite-mcp"],
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
+```
+
+### Codex
+
+One command:
+
+```
+codex mcp add doc2md-lite -- uvx --from doc2md-lite doc2md-lite-mcp
+```
+
+Or add this to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.doc2md-lite]
+command = "uvx"
+args = ["--from", "doc2md-lite", "doc2md-lite-mcp"]
 ```
 
 Tool: `convert_to_markdown(path, tables="lines", output_path="")`. It returns the Markdown text. If you set `output_path`, it saves the file there and returns the path instead.
