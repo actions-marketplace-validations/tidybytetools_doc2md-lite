@@ -211,6 +211,66 @@ gemini extensions install https://github.com/tidybytetools/doc2md-lite
 
 Tool: `convert_to_markdown(path, tables="lines", output_path="")`. It returns the Markdown text. If you set `output_path`, it saves the file there and returns the path instead.
 
+## Use it in GitHub Actions
+
+Turn the PDFs and web pages in your repo into Markdown on every push. Markdown is easy to search, easy to read in a pull request, and easy for AI tools to use.
+
+```yaml
+name: Docs to Markdown
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: tidybytetools/doc2md-lite@v1
+        with:
+          files: docs/**/*.pdf
+          output-dir: markdown
+          artifact-name: docs-markdown   # download the .md files from the run page
+```
+
+**Keep Markdown copies in sync.** Do you commit a `.md` copy next to each PDF? Use check mode. The step fails, on the right file, when a copy is missing or out of date. It never writes anything in check mode.
+
+```yaml
+      - uses: tidybytetools/doc2md-lite@v1
+        with:
+          files: docs/**/*.pdf
+          check: "true"
+```
+
+To make the copies, run `doc2md-lite your.pdf` on your computer, or run the action without `check` and commit what it wrote. Use the same doc2md-lite version in both places so the output matches. The action installs fixed versions of pdfplumber and Beautiful Soup, so the same file always gives the same Markdown.
+
+It runs the code in the same tag you pick. No API key, no account, and your files are not sent anywhere outside GitHub. It works on Linux, Windows and Mac runners. Scanned PDF pages (just a picture, no text) are skipped with a warning. Set `fail-on-scanned: "true"` to fail on them instead.
+
+### Inputs
+
+| Input | Default | What it does |
+|---|---|---|
+| `files` | `**/*.pdf` | Which files to convert (.pdf, .html, .htm). Glob patterns, one per line or split by commas. |
+| `exclude` | `node_modules/**`, `**/node_modules/**`, `vendor/**` | Patterns to skip. |
+| `output-dir` | (empty) | Folder for the Markdown. It copies the folder layout. Empty saves each `.md` next to its file. |
+| `tables` | `lines` | PDF tables: `lines` (with borders), `text` (also lined up by spaces), or `off`. |
+| `check` | `false` | Only check. Fail if a Markdown copy is missing or out of date. |
+| `fail-on-scanned` | `false` | Fail when a PDF has scanned pages with no text. |
+| `fail-if-no-files` | `true` | Fail when no files match. |
+| `artifact-name` | (empty) | If set, upload the Markdown as an artifact with this name. Needs `output-dir`. |
+| `python-version` | (empty) | Python to set up. Empty uses the runner's Python (3.10 or newer). |
+
+### Outputs
+
+| Output | What it is |
+|---|---|
+| `files` | How many PDF and HTML files matched. |
+| `converted` | How many were converted (or checked) with no errors. |
+| `changed` | How many Markdown files are new or changed. In check mode, how many are missing or out of date. |
+| `scanned-files` | How many PDFs have scanned pages. |
+| `output-dir` | The output folder. |
+
+The run page also gets a short report with one row per file: where the Markdown went, and how many headings and tables it found.
+
 ## For AI agents
 
 - **Use when:** you have a local PDF with real text (you can select the words) or a saved HTML file, and you want Markdown to read or store.

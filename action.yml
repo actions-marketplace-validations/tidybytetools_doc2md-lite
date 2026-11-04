@@ -1,0 +1,121 @@
+name: "Doc2MD Lite"
+description: "Turn PDF and HTML files in your repo into clean Markdown, with tables kept as tables. Or check the Markdown copies are up to date."
+author: "Tidy Byte Tools"
+branding:
+  icon: "file-text"
+  color: "blue"
+
+inputs:
+  files:
+    description: "Which files to convert (.pdf, .html, .htm). Glob patterns, one per line or split by commas. ** goes into sub-folders."
+    required: false
+    default: "**/*.pdf"
+  exclude:
+    description: "Glob patterns to skip, one per line or split by commas."
+    required: false
+    default: |
+      node_modules/**
+      **/node_modules/**
+      vendor/**
+  output-dir:
+    description: "Folder for the Markdown files. It copies the folder layout. Leave empty to save each .md next to its file."
+    required: false
+    default: ""
+  tables:
+    description: "PDF tables: lines (tables with borders), text (also tables lined up by spaces), or off."
+    required: false
+    default: "lines"
+  check:
+    description: "Set to true to only check. The step fails if a Markdown copy is missing or out of date. Nothing is written."
+    required: false
+    default: "false"
+  fail-on-scanned:
+    description: "Set to true to fail when a PDF has scanned pages with no text. By default it only warns."
+    required: false
+    default: "false"
+  fail-if-no-files:
+    description: "Fail the step when no files match. Set to false to just warn."
+    required: false
+    default: "true"
+  artifact-name:
+    description: "If set, upload the Markdown files as a workflow artifact with this name. Needs output-dir."
+    required: false
+    default: ""
+  python-version:
+    description: "Python version to set up. Leave empty to use the runner's own Python (3.10 or newer)."
+    required: false
+    default: ""
+
+outputs:
+  files:
+    description: "How many PDF and HTML files matched."
+    value: ${{ steps.convert.outputs.files }}
+  converted:
+    description: "How many files were converted (or checked) without errors."
+    value: ${{ steps.convert.outputs.converted }}
+  changed:
+    description: "How many Markdown files are new or changed. In check mode: how many are missing or out of date."
+    value: ${{ steps.convert.outputs.changed }}
+  scanned-files:
+    description: "How many PDFs have scanned pages with no text."
+    value: ${{ steps.convert.outputs.scanned-files }}
+  output-dir:
+    description: "The output folder (empty when files are saved next to their source)."
+    value: ${{ steps.convert.outputs.output-dir }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      id: setup
+      if: inputs.python-version != ''
+      uses: actions/setup-python@v7
+      with:
+        python-version: ${{ inputs.python-version }}
+        update-environment: false
+
+    - name: Install Doc2MD Lite
+      id: py
+      shell: bash
+      env:
+        SETUP_PY: ${{ steps.setup.outputs.python-path }}
+      run: |
+        base=""
+        for c in "$SETUP_PY" python3 python; do
+          if [ -n "$c" ] && command -v "$c" >/dev/null 2>&1 && "$c" -c 'import sys; sys.exit(sys.version_info < (3, 10))' 2>/dev/null; then
+            base="$c"; break
+          fi
+        done
+        if [ -z "$base" ]; then
+          echo "::error::Doc2MD Lite needs Python 3.10 or newer. Set the python-version input, like python-version: '3.12'."
+          exit 1
+        fi
+        venv="$RUNNER_TEMP/doc2md-lite-venv"
+        "$base" -m venv "$venv"
+        if [ -x "$venv/bin/python" ]; then py="$venv/bin/python"; else py="$venv/Scripts/python.exe"; fi
+        "$py" -m pip install --disable-pip-version-check -q -r "$GITHUB_ACTION_PATH/action/requirements.txt"
+        echo "python=$py" >> "$GITHUB_OUTPUT"
+
+    - name: Convert to Markdown
+      id: convert
+      shell: bash
+      env:
+        PYTHON: ${{ steps.py.outputs.python }}
+        INPUT_FILES: ${{ inputs.files }}
+        INPUT_EXCLUDE: ${{ inputs.exclude }}
+        INPUT_OUTPUT_DIR: ${{ inputs.output-dir }}
+        INPUT_TABLES: ${{ inputs.tables }}
+        INPUT_CHECK: ${{ inputs.check }}
+        INPUT_FAIL_ON_SCANNED: ${{ inputs.fail-on-scanned }}
+        INPUT_FAIL_IF_NO_FILES: ${{ inputs.fail-if-no-files }}
+        PYTHONUTF8: "1"
+        PYTHONDONTWRITEBYTECODE: "1"
+      run: '"$PYTHON" "$GITHUB_ACTION_PATH/action/run.py"'
+
+    - name: Upload Markdown
+      if: inputs.artifact-name != '' && inputs.output-dir != '' && steps.convert.outputs.converted != '' && steps.convert.outputs.converted != '0' && !cancelled()
+      uses: actions/upload-artifact@v7
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: ${{ inputs.output-dir }}
+        if-no-files-found: error

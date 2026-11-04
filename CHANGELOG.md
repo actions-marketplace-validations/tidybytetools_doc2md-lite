@@ -2,6 +2,13 @@
 
 What changed in doc2md-lite, newest first.
 
+## 1.2.0 - 2026-11-04
+
+- New: a GitHub Action (`action.yml`). Add `uses: tidybytetools/doc2md-lite@v1` to a workflow to turn the PDF and HTML files in your repo into Markdown.
+- Check mode (`check: "true"`) fails the step when a committed Markdown copy is missing or out of date.
+- The action warns about scanned PDF pages, can upload the Markdown as an artifact, and writes a report to the run page.
+- The command-line tool and MCP server did not change.
+
 ## 1.1.1 - 2026-11-04
 
 - Fix: installing from the MCP Registry now starts the MCP server. Before, it started the plain command-line tool by mistake.

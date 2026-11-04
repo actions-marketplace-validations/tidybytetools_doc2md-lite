@@ -1,0 +1,139 @@
+name: Action test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  convert:
+    name: PDF and HTML convert (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v7
+      - id: d2m
+        uses: ./
+        with:
+          files: |
+            .github/action-test/docs/*.pdf
+            .github/action-test/docs/*.html
+          output-dir: out
+          artifact-name: markdown-${{ matrix.os }}
+      - name: Check the outputs
+        shell: bash
+        run: |
+          test "${{ steps.d2m.outputs.files }}" = "2"
+          test "${{ steps.d2m.outputs.converted }}" = "2"
+          test "${{ steps.d2m.outputs.changed }}" = "2"
+          test "${{ steps.d2m.outputs.scanned-files }}" = "0"
+          test -s out/.github/action-test/docs/report.md
+          test -s out/.github/action-test/docs/help.md
+          grep -q '^|' out/.github/action-test/docs/report.md
+
+  check-up-to-date:
+    name: Check mode passes when the Markdown is up to date
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - id: d2m
+        uses: ./
+        with:
+          files: .github/action-test/synced/*.pdf
+          check: "true"
+      - name: Check the outputs
+        run: |
+          test "${{ steps.d2m.outputs.changed }}" = "0"
+          git diff --exit-code
+
+  check-out-of-date:
+    name: Check mode fails when the Markdown is out of date
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - id: d2m
+        uses: ./
+        continue-on-error: true
+        with:
+          files: .github/action-test/stale/*.pdf
+          check: "true"
+      - name: Check that the step failed and wrote nothing
+        run: |
+          test "${{ steps.d2m.outcome }}" = "failure"
+          test "${{ steps.d2m.outputs.changed }}" = "1"
+          git diff --exit-code
+
+  scanned-warns:
+    name: A scanned PDF warns but passes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - id: d2m
+        uses: ./
+        with:
+          files: .github/action-test/scanned/*.pdf
+          output-dir: out
+      - name: Check the outputs
+        run: test "${{ steps.d2m.outputs.scanned-files }}" = "1"
+
+  scanned-fails:
+    name: fail-on-scanned true fails the step
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - id: d2m
+        uses: ./
+        continue-on-error: true
+        with:
+          files: .github/action-test/scanned/*.pdf
+          output-dir: out
+          fail-on-scanned: "true"
+      - name: Check that the step failed
+        run: test "${{ steps.d2m.outcome }}" = "failure"
+
+  no-files-fails:
+    name: No matching files fails the step
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - id: d2m
+        uses: ./
+        continue-on-error: true
+        with:
+          files: does-not-exist/**/*.pdf
+      - name: Check that the step failed
+        run: test "${{ steps.d2m.outcome }}" = "failure"
+
+  bad-input-fails:
+    name: A bad setting fails the step
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - id: d2m
+        uses: ./
+        continue-on-error: true
+        with:
+          files: .github/action-test/docs/*.pdf
+          tables: "maybe"
+      - name: Check that the step failed
+        run: test "${{ steps.d2m.outcome }}" = "failure"
+
+  set-python-version:
+    name: Works with python-version set
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - id: d2m
+        uses: ./
+        with:
+          files: .github/action-test/docs/report.pdf
+          python-version: "3.10"
+      - name: Check the outputs
+        run: |
+          test "${{ steps.d2m.outputs.converted }}" = "1"
+          test -s .github/action-test/docs/report.md
