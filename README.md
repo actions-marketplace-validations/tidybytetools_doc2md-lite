@@ -199,6 +199,14 @@ command = "uvx"
 args = ["--from", "doc2md-lite", "doc2md-lite-mcp"]
 ```
 
+### Gemini CLI
+
+This repo is also a Gemini CLI extension. Install it with:
+
+```
+gemini extensions install https://github.com/tidybytetools/doc2md-lite
+```
+
 Tool: `convert_to_markdown(path, tables="lines", output_path="")`. It returns the Markdown text. If you set `output_path`, it saves the file there and returns the path instead.
 
 ## For AI agents
