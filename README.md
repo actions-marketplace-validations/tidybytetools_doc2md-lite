@@ -15,6 +15,7 @@
 [![MCP Registry](https://img.shields.io/badge/MCP_Registry-listed-green.svg)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.tidybytetools/doc2md-lite)
 [![PyPI downloads](https://img.shields.io/pypi/dm/doc2md-lite.svg)](https://pypistats.org/packages/doc2md-lite)
 [![Glama score](https://glama.ai/mcp/servers/tidybytetools/doc2md-lite/badges/score.svg)](https://glama.ai/mcp/servers/tidybytetools/doc2md-lite)
+[![Action test](https://github.com/tidybytetools/doc2md-lite/actions/workflows/action-test.yml/badge.svg)](https://github.com/tidybytetools/doc2md-lite/actions/workflows/action-test.yml)
 
 **Free. No API key. Runs on your own computer, so your files stay with you.**
 
