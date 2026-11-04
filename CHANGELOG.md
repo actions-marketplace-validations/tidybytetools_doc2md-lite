@@ -2,6 +2,12 @@
 
 What changed in doc2md-lite, newest first.
 
+## 1.1.1 - 2026-11-04
+
+- Fix: installing from the MCP Registry now starts the MCP server. Before, it started the plain command-line tool by mistake.
+- New: `doc2md-lite mcp` starts the MCP server. `uvx doc2md-lite mcp` works too. The old `doc2md-lite-mcp` command still works.
+- To read a file that is named `mcp`, use `./mcp`.
+
 ## 1.1.0 - 2026-11-04
 
 - MCP tool now has safety labels (tool annotations) so AI apps know what it does:

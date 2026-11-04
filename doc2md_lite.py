@@ -12,7 +12,7 @@ Paid version (Word files, RAG chunks, whole folders, page picking): https://tidy
 import argparse, json, os, re, sys
 from collections import Counter
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 PAID_URL = "https://tidybyte.gumroad.com/l/frlkv"
 
 
@@ -338,7 +338,20 @@ def convert(path, tables="lines"):
     return blocks_to_md(blocks), info
 
 
+def run_mcp():
+    """Start the stdio MCP server (needs the mcp package, which pip installs for you)."""
+    try:
+        import doc2md_lite_mcp
+    except ImportError as e:
+        print(f"error: the MCP server needs the mcp package ({e}). Run: pip install doc2md-lite", file=sys.stderr)
+        return 1
+    doc2md_lite_mcp.main()
+    return 0
+
 def main(argv=None):
+    argv = sys.argv[1:] if argv is None else argv
+    if argv == ["mcp"]:
+        return run_mcp()
     ap = argparse.ArgumentParser(description="Turn a text PDF or HTML file into clean Markdown.")
     ap.add_argument("file", help="a .pdf or .html file")
     ap.add_argument("-o", "--output", help="output .md file, or - for the screen. Default: next to the input")

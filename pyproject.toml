@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "doc2md-lite"
-version = "1.1.0"
+version = "1.1.1"
 description = "Turn a text PDF or HTML file into clean Markdown, with tables kept as Markdown tables. Runs locally. CLI and MCP server."
 readme = "README.md"
 license = "MIT"

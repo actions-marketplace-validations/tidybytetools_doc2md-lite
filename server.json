@@ -8,17 +8,24 @@
     "source": "github"
   },
   "websiteUrl": "https://github.com/tidybytetools/doc2md-lite",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "packages": [
     {
       "registryType": "pypi",
       "registryBaseUrl": "https://pypi.org",
       "identifier": "doc2md-lite",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "runtimeHint": "uvx",
       "transport": {
         "type": "stdio"
-      }
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp",
+          "description": "Starts the MCP server instead of the command-line tool."
+        }
+      ]
     }
   ]
 }

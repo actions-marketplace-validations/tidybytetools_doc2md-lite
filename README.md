@@ -110,6 +110,8 @@ Run it by hand to check it starts (it waits quietly for an app to talk to it):
 uvx --from doc2md-lite doc2md-lite-mcp
 ```
 
+Shorter way to start the same server: `uvx doc2md-lite mcp`.
+
 Pick your app below and copy the block. Restart the app after you save.
 
 ### Claude Desktop
