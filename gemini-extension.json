@@ -1,6 +1,6 @@
 {
   "name": "doc2md-lite",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Turn local text PDFs and HTML files into clean Markdown, tables kept. Runs on your computer.",
   "mcpServers": {
     "doc2md-lite": {

@@ -24,6 +24,12 @@ Need Word files, chunks for AI search (RAG), whole folders or page ranges? The p
 
 Runs on your own computer, so your files are never uploaded anywhere. MIT license. Python 3.10 or newer, on Windows, Mac and Linux.
 
+## Links
+
+- **[Website](https://tidybytetools.github.io/tools/doc2md/)** — product page with prices and options
+- **[Apify (no-install cloud version)](https://apify.com/tidybytetools/doc-to-markdown)** — pay only for what you use
+- **[Pro version on Gumroad](https://tidybyte.gumroad.com/l/frlkv)** — Word files, folders, RAG chunks, page ranges
+
 <!-- mcp-name: io.github.tidybytetools/doc2md-lite -->
 
 ## Install
@@ -294,6 +300,19 @@ pip install pdfplumber beautifulsoup4 reportlab "mcp<2"
 python3 -m unittest discover tests
 ```
 
+## FAQ
+
+**What files does the free version read?**
+Text PDFs and saved HTML pages. It skips scanned (picture-only) PDF pages and does not read Word files.
+
+**Do my files leave my computer?**
+No. The tool runs on your computer. Nothing is uploaded.
+
+**How is this different from the Pro version?**
+Pro adds Word (.docx), whole folders, page ranges, password-protected PDFs, and RAG chunks. See the comparison table above.
+
+**Does it work with AI apps?**
+Yes. It includes a free MCP server for Cursor, Claude Desktop, and other MCP apps. No API key.
 ## License
 
 MIT. See `LICENSE`.

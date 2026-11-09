@@ -2,6 +2,11 @@
 
 What changed in doc2md-lite, newest first.
 
+## 1.2.1 - 2026-11-09
+
+- Point Homepage, Documentation, and the MCP Registry websiteUrl at the official product page on [tidybytetools.github.io](https://tidybytetools.github.io/tools/doc2md/).
+- README: add a clear Links section (Website, Apify cloud version where it exists, Pro on Gumroad) and a short FAQ.
+
 ## 1.2.0 - 2026-11-09
 
 - Fix: if the Markdown was saved under a hidden folder like `.github/`, the artifact upload said no files were found. The upload now includes those folders.
