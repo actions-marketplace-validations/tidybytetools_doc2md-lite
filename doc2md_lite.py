@@ -12,7 +12,7 @@ Paid version (Word files, RAG chunks, whole folders, page picking): https://tidy
 import argparse, json, os, re, sys
 from collections import Counter
 
-__version__ = "1.2.1"
+__version__ = "1.2.2"
 PAID_URL = "https://tidybyte.gumroad.com/l/frlkv"
 
 

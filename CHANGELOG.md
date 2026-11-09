@@ -2,6 +2,10 @@
 
 What changed in doc2md-lite, newest first.
 
+## 1.2.2 - 2026-11-09
+
+- Shorten the GitHub Action description to under 125 characters so the Action can be listed on the GitHub Marketplace.
+
 ## 1.2.1 - 2026-11-09
 
 - Point Homepage, Documentation, and the MCP Registry websiteUrl at the official product page on [tidybytetools.github.io](https://tidybytetools.github.io/tools/doc2md/).

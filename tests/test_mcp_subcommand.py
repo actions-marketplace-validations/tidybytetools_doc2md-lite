@@ -35,7 +35,7 @@ class CliStillWorks(unittest.TestCase):
     def test_version_and_help(self):
         out = subprocess.run([sys.executable, os.path.join(ROOT, "doc2md_lite.py"), "--version"], capture_output=True, text=True)
         self.assertEqual(out.returncode, 0)
-        self.assertEqual(out.stdout.strip(), "1.2.1")
+        self.assertEqual(out.stdout.strip(), "1.2.2")
         h = subprocess.run([sys.executable, os.path.join(ROOT, "doc2md_lite.py"), "--help"], capture_output=True, text=True)
         self.assertEqual(h.returncode, 0)
 

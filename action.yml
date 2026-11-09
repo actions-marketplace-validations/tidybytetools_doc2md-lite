@@ -1,5 +1,5 @@
 name: "Doc2MD Lite"
-description: "Turn PDF and HTML files in your repo into clean Markdown, with tables kept as tables. Or check the Markdown copies are up to date."
+description: "Convert PDF and HTML files to clean Markdown for RAG and AI docs. Free, offline, no API key."
 author: "Tidy Byte Tools"
 branding:
   icon: "file-text"
