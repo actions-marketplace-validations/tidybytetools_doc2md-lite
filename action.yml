@@ -119,3 +119,4 @@ runs:
         name: ${{ inputs.artifact-name }}
         path: ${{ inputs.output-dir }}
         if-no-files-found: error
+        include-hidden-files: true

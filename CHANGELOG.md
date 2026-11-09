@@ -2,8 +2,9 @@
 
 What changed in doc2md-lite, newest first.
 
-## 1.2.0 - 2026-11-04
+## 1.2.0 - 2026-11-09
 
+- Fix: if the Markdown was saved under a hidden folder like `.github/`, the artifact upload said no files were found. The upload now includes those folders.
 - New: a GitHub Action (`action.yml`). Add `uses: tidybytetools/doc2md-lite@v1` to a workflow to turn the PDF and HTML files in your repo into Markdown.
 - Check mode (`check: "true"`) fails the step when a committed Markdown copy is missing or out of date.
 - The action warns about scanned PDF pages, can upload the Markdown as an artifact, and writes a report to the run page.

@@ -257,7 +257,7 @@ It runs the code in the same tag you pick. No API key, no account, and your file
 | `check` | `false` | Only check. Fail if a Markdown copy is missing or out of date. |
 | `fail-on-scanned` | `false` | Fail when a PDF has scanned pages with no text. |
 | `fail-if-no-files` | `true` | Fail when no files match. |
-| `artifact-name` | (empty) | If set, upload the Markdown as an artifact with this name. Needs `output-dir`. |
+| `artifact-name` | (empty) | If set, upload the Markdown as an artifact with this name. Needs `output-dir`. Hidden folders like `.github/` are included. |
 | `python-version` | (empty) | Python to set up. Empty uses the runner's Python (3.10 or newer). |
 
 ### Outputs
