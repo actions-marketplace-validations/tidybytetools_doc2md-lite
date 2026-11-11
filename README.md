@@ -24,6 +24,8 @@ Need Word files, chunks for AI search (RAG), whole folders or page ranges? The p
 
 Runs on your own computer, so your files are never uploaded anywhere. MIT license. Python 3.10 or newer, on Windows, Mac and Linux.
 
+Also searched as: ES: convertir PDF a Markdown / PT: converter PDF para Markdown / DE: PDF in Markdown umwandeln / FR: convertir un PDF en Markdown / JA: PDFをMarkdownに変換
+
 ## Links
 
 - **[Website](https://tidybytetools.github.io/tools/doc2md/)** — product page with prices and options
@@ -31,6 +33,10 @@ Runs on your own computer, so your files are never uploaded anywhere. MIT licens
 - **[Pro version on Gumroad](https://tidybyte.gumroad.com/l/frlkv)** — Word files, folders, RAG chunks, page ranges
 
 <!-- mcp-name: io.github.tidybytetools/doc2md-lite -->
+
+## Before and after
+
+Before: a text PDF or an HTML file. After: Markdown with headings and tables kept as tables. Scanned pages are skipped. This free tool does not read Word files and does not download web pages — save the page first.
 
 ## Install
 
